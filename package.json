@@ -6,7 +6,9 @@
     "unpkg": "dist/vue-bootstrap4-table.min.js",
     "files": [
         "dist",
-        "src"
+        "src/components",
+        "src/event-bus.js",
+        "src/wrapper.js"
     ],
     "description": "Advanced table based on Vue 2 and Bootstrap 4 (Locaboo fork)",
     "author": "Shahil",
