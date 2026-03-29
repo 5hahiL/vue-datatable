@@ -20,7 +20,7 @@ export default {
         globals: {
             vue: 'Vue'
         },
-        banner: '/*!\n * @5hahil/vue-datatable v1.2.0\n * https://github.com/5hahiL/vue-datatable\n * Fork of rubanraj54/vue-bootstrap4-table\n * (c) Shahil | MIT License\n */',
+        banner: '/*!\n * @5hahil/vue-datatable v1.2.1\n * https://github.com/5hahiL/vue-datatable\n * Fork of rubanraj54/vue-bootstrap4-table\n * (c) Shahil | MIT License\n */',
     },
     external: ['vue'],
     plugins: [

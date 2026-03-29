@@ -1,6 +1,6 @@
 {
     "name": "@5hahil/vue-datatable",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "main": "dist/vue-datatable.umd.js",
     "module": "dist/vue-datatable.esm.js",
     "unpkg": "dist/vue-datatable.min.js",
