@@ -1,8 +1,11 @@
 
 
 
-
 # @5hahil/vue-datatable
+
+[![npm version](https://img.shields.io/npm/v/@5hahil/vue-datatable.svg)](https://www.npmjs.com/package/@5hahil/vue-datatable)
+[![npm downloads](https://img.shields.io/npm/dt/@5hahil/vue-datatable.svg)](https://www.npmjs.com/package/@5hahil/vue-datatable)
+[![License: MIT](https://img.shields.io/npm/l/@5hahil/vue-datatable.svg)](https://github.com/5hahiL/vue-datatable/blob/master/LICENSE)
 
 > Fork of [rubanraj54/vue-bootstrap4-table](https://github.com/rubanraj54/vue-bootstrap4-table) (v1.1.11) with customizations for Locaboo.
 
@@ -154,9 +157,9 @@ We are using **`lodash`** internally, so you don't need to install separately fo
 
 ...
 
-<script  src="https://unpkg.com/@5hahil/vue-datatable@1.2.0/dist/vue-bootstrap4-table.min.js"  crossorigin="anonymous"></script>
+<script  src="https://unpkg.com/@5hahil/vue-datatable@1.2.0/dist/vue-datatable.min.js"  crossorigin="anonymous"></script>
 ```
-**Note:** If you've included bootstrap & jQuery packages already in your project, then include only **vue-bootstrap4-table.min.js** script.
+**Note:** If you've included bootstrap & jQuery packages already in your project, then include only **vue-datatable.min.js** script.
 
 # 4. Basic Usage
 It is easy to include vue-datatable as a component in your application.

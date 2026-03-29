@@ -1,9 +1,9 @@
 {
     "name": "@5hahil/vue-datatable",
     "version": "1.2.0",
-    "main": "dist/vue-bootstrap4-table.umd.js",
-    "module": "dist/vue-bootstrap4-table.esm.js",
-    "unpkg": "dist/vue-bootstrap4-table.min.js",
+    "main": "dist/vue-datatable.umd.js",
+    "module": "dist/vue-datatable.esm.js",
+    "unpkg": "dist/vue-datatable.min.js",
     "files": [
         "dist",
         "src/components",
@@ -19,9 +19,9 @@
         "test:watch": "mocha-webpack --watch --webpack-config build/webpack.test.conf.js --require test/setup.js test/**/*.spec.js",
         "cover": "cross-env NODE_ENV=coverage nyc --reporter=lcov --reporter=html --reporter=text npm run test",
         "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
-        "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-bootstrap4-table.umd.js",
-        "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-bootstrap4-table.esm.js",
-        "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-bootstrap4-table.min.js"
+        "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-datatable.umd.js",
+        "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-datatable.esm.js",
+        "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-datatable.min.js"
     },
     "dependencies": {
         "lodash": "^4.17.11"

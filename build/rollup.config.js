@@ -17,6 +17,9 @@ export default {
     output: {
         name: 'VueBootstrap4Table',
         exports: 'named',
+        globals: {
+            vue: 'Vue'
+        },
     },
     external: ['vue'],
     plugins: [
