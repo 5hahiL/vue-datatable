@@ -34,7 +34,7 @@ For upstream features and full API documentation, see the [original docs](https:
 
 Table of Contents
 =================
-- [1. vue-bootstrap4-table](#1-vue-bootstrap4-table)
+- [1. @5hahil/vue-datatable](#1-5hahilvue-datatable)
 - [2. Features](#2-features)
 - [3. Installation](#3-installation)
   * [3.1. Install via npm or yarn](#31-install-via-npm-or-yarn)
@@ -128,15 +128,15 @@ Table of Contents
 # 3. Installation
 ## 3.1. Install via npm or yarn
 
-**`$ npm i vue-bootstrap4-table --save`**
+**`$ npm i @5hahil/vue-datatable --save`**
 
-**`$ yarn add vue-bootstrap4-table`**
+**`$ yarn add @5hahil/vue-datatable`**
 
-Currently this package will install only the vue-bootstrap4-table component, not their dependencies. So make sure to install the following dependencies.
+Currently this package will install only the vue-datatable component, not its dependencies. So make sure to install the following dependencies.
 
 ### 3.1.1. Dependencies
 
--   bootstrap 4 (js and css) You should include bootstrap before vue-bootstrap4-table plugin.
+-   bootstrap 4 (js and css) You should include bootstrap before vue-datatable plugin.
 
 
 We are using **`lodash`** internally, so you don't need to install separately for this plugin.
@@ -154,18 +154,18 @@ We are using **`lodash`** internally, so you don't need to install separately fo
 
 ...
 
-<script  src="https://unpkg.com/vue-bootstrap4-table@1.1.11/dist/vue-bootstrap4-table.min.js"  crossorigin="anonymous"></script>
+<script  src="https://unpkg.com/@5hahil/vue-datatable@1.2.0/dist/vue-bootstrap4-table.min.js"  crossorigin="anonymous"></script>
 ```
 **Note:** If you've included bootstrap & jQuery packages already in your project, then include only **vue-bootstrap4-table.min.js** script.
 
 # 4. Basic Usage
-It is easy to include vue-bootstrap4-table as a component in your application.
+It is easy to include vue-datatable as a component in your application.
 
 Import VueBootstrap4Table component in any of your vue component and start using it right away.
 
 **Note:** If you included the library via CDN, then you don't need to import, you can use **`vue-bootstrap4-table`**  component right away.
 
-**`rows`** and **`columns`** props should be passed down to **`vue-bootstrap4-table`** component to work with the table.
+**`rows`** and **`columns`** props should be passed down to the **`vue-bootstrap4-table`** component to work with the table.
 
 ```vue
 <template>
@@ -176,7 +176,7 @@ Import VueBootstrap4Table component in any of your vue component and start using
 </template>
 
 <script>
-import VueBootstrap4Table from 'vue-bootstrap4-table'
+import VueBootstrap4Table from '@5hahil/vue-datatable'
 
 export default {
     name: 'App',
@@ -329,7 +329,7 @@ columns: [{
 
 ## 5.3. Column slot
 
-At some point, you might want to override or format the values in the column header. **`vue-bootstrap4-table`** allow you to achieve that with the help of vue slotting.
+At some point, you might want to override or format the values in the column header. **`vue-datatable`** allows you to achieve that with the help of vue slotting.
 ### 5.3.1. Example
 
 ```vue
@@ -376,7 +376,7 @@ From **`slot-scope="props"`** you can access the following attributes.
 |--|--|
 | props.column | Current column config object |
 # 6. Rows
-You bind your list of items as array of objects to **`rows`** props to **`vue-bootstrap4-table`** component, then voilà.. you can start work with the table.
+You bind your list of items as array of objects to **`rows`** props to the **`vue-bootstrap4-table`** component, then voilà.. you can start work with the table.
 ## 6.1. Basic structure
 ```javascript
 rows: [{
@@ -415,7 +415,7 @@ rows: [{
     }]
 ```
 ## 6.2. Row Slot
-At some point, you might want to override or format the values in the row cells. **`vue-bootstrap4-table`** allow you to achieve that with the help of vue slotting.
+At some point, you might want to override or format the values in the row cells. **`vue-datatable`** allows you to achieve that with the help of vue slotting.
 ### 6.2.1. Example
 ```vue
 ...
@@ -474,7 +474,7 @@ From **`slot-scope="props"`** you can access the following attributes.
 | props.column |  Current column config object|
 
 ## 6.3. Empty result message slot
-If the given **`rows`** data is empty or result set is empty after applying filters, vue-bootstrap4-table shows this default message "No results found". You can override the message as like your wish with the help of **`empty-results`** slot.
+If the given **`rows`** data is empty or result set is empty after applying filters, vue-datatable shows this default message "No results found". You can override the message as like your wish with the help of **`empty-results`** slot.
 
 ### 6.3.1. Example
 ```vue
@@ -529,7 +529,7 @@ If you would like to enable the multi column sorting, set **`multi_column_sort`*
 </template>
 
 <script>
-    import VueBootstrap4Table from 'vue-bootstrap4-table'
+    import VueBootstrap4Table from '@5hahil/vue-datatable'
 
     export default {
         name: 'App',
@@ -558,7 +558,7 @@ If you would like to enable the multi column sorting, set **`multi_column_sort`*
 
 ### 7.5.1. Sort Icon
 
-You can change the sort icons based on your choice, For example if you're using font-awesome or glyphicon in your application, you can still use them for vue-bootstrap4-table.
+You can change the sort icons based on your choice, For example if you're using font-awesome or glyphicon in your application, you can still use them for vue-datatable.
 
 You can inject your favorite sort icons via slots.
 
@@ -742,7 +742,7 @@ You can enable or disable search text input with custom configuration as shown i
 </template>
 
 <script>
-    import VueBootstrap4Table from 'vue-bootstrap4-table'
+    import VueBootstrap4Table from '@5hahil/vue-datatable'
 
     export default {
         name: 'App',
@@ -825,7 +825,7 @@ Pagination component is built based on Bootstrap 4 pagination template. You can 
 </template>
 
 <script>
-    import VueBootstrap4Table from 'vue-bootstrap4-table'
+    import VueBootstrap4Table from '@5hahil/vue-datatable'
 
     export default {
         name: 'App',
@@ -948,7 +948,7 @@ Refresh button emits a refresh event to your application (parent component). You
 </template>
 
 <script>
-    import VueBootstrap4Table from 'vue-bootstrap4-table'
+    import VueBootstrap4Table from '@5hahil/vue-datatable'
 
     export default {
         name: 'App',
@@ -1038,7 +1038,7 @@ You can add your custom buttons in the table by **`actions`** props and listen f
 </template>
 
 <script>
-    import VueBootstrap4Table from 'vue-bootstrap4-table'
+    import VueBootstrap4Table from '@5hahil/vue-datatable'
 
     export default {
         name: 'App',
@@ -1104,7 +1104,7 @@ You can pass your classes for the table, row, cell, etc.. via **`classes`**  pro
 </template>
 
 <script>
-    import VueBootstrap4Table from 'vue-bootstrap4-table'
+    import VueBootstrap4Table from '@5hahil/vue-datatable'
     export default {
         name: 'App',
         data: function() {
@@ -1172,7 +1172,7 @@ This class is being applied to outer <div> element of <table> element.
 ```
 
 # 15. Config
-You can optionally pass config as a prop to **`vue-bootstrap4-table`** component to override the table configuration defaults.
+You can optionally pass config as a prop to the **`vue-bootstrap4-table`** component to override the table configuration defaults.
 
 ## 15.1. Example
 ```vue
@@ -1184,7 +1184,7 @@ You can optionally pass config as a prop to **`vue-bootstrap4-table`** component
 </template>
 
 <script>
-    import VueBootstrap4Table from 'vue-bootstrap4-table'
+    import VueBootstrap4Table from '@5hahil/vue-datatable'
 
     export default {
         name: 'App',
@@ -1278,7 +1278,7 @@ In server mode, client side filtering, sorting, global search and pagination wil
 </template>
 
 <script>
-    import VueBootstrap4Table from 'vue-bootstrap4-table'
+    import VueBootstrap4Table from '@5hahil/vue-datatable'
     export default {
         name: 'App',
         data: function() {
@@ -1434,9 +1434,9 @@ columns: [
 
 ### 16.2. Loader overlay
 
-You may need to show a loader animation over the table while your request is busy with processing data on the server. You can show/hide the loader overlay by passing the prop **`show-loader`** to **`vue-bootstrap4-table`**.
+You may need to show a loader animation over the table while your request is busy with processing data on the server. You can show/hide the loader overlay by passing the prop **`show-loader`** to the **`vue-bootstrap4-table`** component.
 
-If you would like to change the loader default text **`Loading...`**, you could pass your custom text in the **`config`** param **`loaderText`** https://github.com/rubanraj54/vue-bootstrap4-table#15-config.
+If you would like to change the loader default text **`Loading...`**, you could pass your custom text in the **`config`** param **`loaderText`**.
 
 Didn't like the default loader animation ??? No problem, you can use **`loader-overlay`** slot to use your custom loader animation.
 
