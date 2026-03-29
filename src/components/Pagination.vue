@@ -44,21 +44,21 @@
                     </a>
                 </li>
                 <!-- Number of rows per page starts here -->
-                <div class="dropdown show vbt-per-page-dropdown">
-                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{per_page}}
+                <div class="dropdown dropup show vbt-per-page-dropdown">
+                    <a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{per_page}} {{per_page_label}}
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a v-for="(option, key, index) in per_page_options" :key="index" class="dropdown-item" href="" @click.prevent="perPageHandler(option)" v-bind:class="{ active:  (option == per_page)}">
-                            {{option}}
+                            {{option}} {{per_page_label}}
                         </a>
                     </div>
                 </div>
                 <!-- Number of rows per page ends here -->
 
-                <div class="input-group col-sm-2">
-                    <input type="number" class="form-control" min="1" step="1" :max="totalPages" :placeholder="per_page_desc" @keyup.enter="gotoPage" v-model.number="go_to_page">
+                <div v-if="show_goto_page" class="input-group col-sm-2">
+                    <input type="number" class="form-control go-to-page-box" min="1" step="1" :max="totalPages" :placeholder="per_page_desc" @keyup.enter="gotoPage" @input="gotoPage" v-model.number="go_to_page">
                 </div>
             </ul>
         </nav>
@@ -84,6 +84,14 @@
             per_page_desc: {
                 type: [String],
                 default: 'Go to page',
+            },
+            per_page_label: {
+                type: [String],
+                default: 'per page',
+            },
+            show_goto_page: {
+                type: Boolean,
+                default: false,
             },
             total: {
                 type: [String, Number],

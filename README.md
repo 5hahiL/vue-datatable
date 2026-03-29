@@ -2,31 +2,25 @@
 
 
 
+# @5hahil/vue-datatable
 
+> Fork of [rubanraj54/vue-bootstrap4-table](https://github.com/rubanraj54/vue-bootstrap4-table) (v1.1.11) with customizations for Locaboo.
 
+## Fork Changes
 
+| Change | Description |
+|--------|-------------|
+| Pagination dropup | Per-page dropdown opens upward (`dropup` class) to avoid clipping at page bottom |
+| Per-page label | Dropdown button and items show "X per page" instead of just the number |
+| Go-to-page input | Hidden by default; enable via `config.show_goto_page: true` |
+| Global search click | Search input also triggers on click, supporting browser autofill/autocomplete |
+| Slot scope: activePage, perPageCount | `pagination-info` slot exposes `activePage` and `perPageCount` for external state persistence |
+| Form state sync | `query` watcher syncs filter/sort state to a `<form id="vueForm">` for CakePHP integration; `per_page` and `page` watchers dispatch a change event on `#vueForm_trigger` |
+| Multi-select fallback | Defaults to "{number} selected" when `column.filter.selectedText` is not configured |
 
-# 1. vue-bootstrap4-table
+For upstream features and full API documentation, see the [original docs](https://rubanraj54.gitbook.io/vue-bootstrap4-table/).
 
-> Advanced table based on Vue 2 and Bootstrap 4
-
-
-<p align="center">
-  <a href="https://travis-ci.org/rubanraj54/vue-bootstrap4-table"><img src="https://img.shields.io/travis/rubanraj54/vue-bootstrap4-table.svg?style=popout-square" alt="Build Status"></a>
-  <a href="https://www.npmjs.com/package/vue-bootstrap4-table"><img src="https://img.shields.io/npm/dt/vue-bootstrap4-table.svg?style=popout-square" alt="Total downloads"></a>
-  <a href="https://www.npmjs.com/package/vue-bootstrap4-table"><img src="https://img.shields.io/npm/v/vue-bootstrap4-table.svg?style=popout-square" alt="Latest version"></a>
-  <a href="https://www.npmjs.com/package/vue-bootstrap4-table"><img src="https://img.shields.io/bundlephobia/minzip/vue-bootstrap4-table.svg?style=popout-square" alt="Latest version"></a>
-  <a href="https://www.npmjs.com/package/vue-bootstrap4-table"><img src="https://img.shields.io/npm/l/vue-bootstrap4-table.svg?style=popout-square" alt="Latest version"></a>
-</p>
-
-[Quick Demo in Codepen](https://codepen.io/rubanraj54/full/zyZdzN).
-
-[Docs in gitbook](https://rubanraj54.gitbook.io/vue-bootstrap4-table/).
-
-![Demo](https://raw.githubusercontent.com/rubanraj54/vue-bootstrap4-table/develop/src/assets/img/demo.gif)
-
-
-# 2. Features
+## Features
 * Multi column filtering (Optimized filtering)
 	* Simple filter
 	* Select filter (Single & Multiple)

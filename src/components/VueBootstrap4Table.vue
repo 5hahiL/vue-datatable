@@ -32,7 +32,7 @@
                                                         </slot>
                                                     </span>
                                                     <input v-if="global_search.searchOnPressEnter" ref="global_search" type="text" class="form-control" :placeholder="global_search.placeholder" @keyup.enter="updateGlobalSearchHandler($event.target.value)">
-                                                    <input v-else ref="global_search" type="text" class="form-control" :placeholder="global_search.placeholder" @keyup.stop="updateGlobalSearch($event.target.value)">
+                                                    <input v-else ref="global_search" type="text" class="form-control" :placeholder="global_search.placeholder" @keyup.stop="updateGlobalSearch($event.target.value)" @click.stop="updateGlobalSearch($event.target.value)">
                                                 </div>
                                             </div>
                                             <!-- global search text ends here -->
@@ -181,7 +181,7 @@
                                     <!-- pagination starts here -->
                                     <div class="col-md-8">
                                         <div v-if="pagination">
-                                            <Pagination :page.sync="page" :per_page.sync="per_page" :per_page_options="per_page_options" :total="rowCount" :num_of_visibile_pagination_buttons="num_of_visibile_pagination_buttons">
+                                            <Pagination :page.sync="page" :per_page.sync="per_page" :per_page_desc="per_page_desc" :per_page_options="per_page_options" :show_goto_page="show_goto_page" :per_page_label="per_page_label" :total="rowCount" :num_of_visibile_pagination_buttons="num_of_visibile_pagination_buttons">
                                                 <template slot="vbt-paginataion-previous-button">
                                                     <slot name="paginataion-previous-button">
                                                         &laquo;
@@ -201,7 +201,7 @@
                                     <div class="col-md-4">
                                         <div class="text-right justify-content-center">
                                             <template v-if="pagination_info">
-                                                <slot name="pagination-info" :currentPageRowsLength="currentPageRowsLength" :filteredRowsLength="filteredRowsLength" :originalRowsLength="originalRowsLength">
+                                                <slot name="pagination-info" :activePage="activePage" :perPageCount="perPageCount" :currentPageRowsLength="currentPageRowsLength" :filteredRowsLength="filteredRowsLength" :originalRowsLength="originalRowsLength">
                                                     <template v-if="currentPageRowsLength != 0">
                                                         From 1 to {{currentPageRowsLength}} of {{filteredRowsLength}} entries
                                                     </template>
@@ -241,7 +241,7 @@
                     <!-- pagination starts here -->
                     <div class="col-md-6">
                         <div v-if="pagination">
-                            <Pagination :page.sync="page" :per_page.sync="per_page" :per_page_desc="per_page_desc" :per_page_options="per_page_options" :total="rowCount" :num_of_visibile_pagination_buttons="num_of_visibile_pagination_buttons">
+                            <Pagination :page.sync="page" :per_page.sync="per_page" :per_page_desc="per_page_desc" :per_page_options="per_page_options" :show_goto_page="show_goto_page" :per_page_label="per_page_label" :total="rowCount" :num_of_visibile_pagination_buttons="num_of_visibile_pagination_buttons">
                                 <template slot="vbt-paginataion-previous-button">
                                     <slot name="paginataion-previous-button">
                                         &laquo;
@@ -261,7 +261,7 @@
                     <div class="col-md-6">
                         <div class="text-right justify-content-center">
                             <template v-if="pagination_info">
-                                <slot name="pagination-info" :currentPageRowsLength="currentPageRowsLength" :filteredRowsLength="filteredRowsLength" :originalRowsLength="originalRowsLength">
+                                <slot name="pagination-info" :activePage="activePage" :perPageCount="perPageCount" :currentPageRowsLength="currentPageRowsLength" :filteredRowsLength="filteredRowsLength" :originalRowsLength="originalRowsLength">
                                     <template v-if="currentPageRowsLength != 0">
                                         From 1 to {{currentPageRowsLength}} of {{filteredRowsLength}} entries
                                     </template>
@@ -408,6 +408,8 @@ export default {
                 }
             },
             per_page_options : [5,10,15],
+            show_goto_page: false,
+            per_page_label: 'per page',
             show_refresh_button: true,
             show_reset_button: true,
             server_mode: false,
@@ -487,6 +489,11 @@ export default {
             this.per_page = (has(this.config, 'per_page')) ? this.config.per_page : 10;
 
             this.per_page_desc = (has(this.config, 'per_page_desc')) ? this.config.per_page_desc : 'Go to page';
+
+            this.show_goto_page = (has(this.config, 'show_goto_page')) ? this.config.show_goto_page : false;
+
+            var labelEl = document.getElementById('label_per_page');
+            this.per_page_label = (labelEl && labelEl.value) || ((has(this.config, 'per_page_label')) ? this.config.per_page_label : 'per page');
 
             this.page = (has(this.config, 'page')) ? this.config.page : 1;
 
@@ -1142,6 +1149,12 @@ export default {
         }
     },
     computed: {
+        activePage() {
+            return this.page;
+        },
+        perPageCount() {
+            return this.per_page;
+        },
         rowCount() {
             if (!this.server_mode) {
                 return this.temp_filtered_results.length;
@@ -1313,6 +1326,56 @@ export default {
                 if (this.server_mode) {
                     this.emitQueryParams();
                 }
+
+                // Reset all filter fields in the form
+                var vueForm = document.getElementById("vueForm");
+                if (vueForm) {
+                    var f_elements = vueForm.elements;
+                    for (var i = 0, f_el; f_el = f_elements[i++];) {
+                        if (f_el.name.endsWith("filter")) {
+                            f_elements[i-1].value = "";
+                        }
+                    }
+                }
+
+                // Sync filter values to hidden form fields
+                this.query.filters.forEach((the_filter) => {
+                    var the_name = the_filter.name.substring(0, the_filter.name.indexOf('.'));
+                    if (!the_name) the_name = the_filter.name;
+                    var the_element = document.getElementsByName(the_name + ".filter")[0];
+                    if (the_element) {
+                        if (the_filter.mode == 'multi') {
+                            var the_filter_keys_str = [];
+                            var ti = 0;
+                            for (var tf = the_filter.config.options.length - 1; tf >= 0; tf--) {
+                                if (the_filter.config.options[tf] && the_filter.selected_options.includes(the_filter.config.options[tf].value)) {
+                                    the_filter_keys_str[ti++] = tf;
+                                }
+                            }
+                            the_element.value = JSON.stringify(the_filter_keys_str);
+                        } else {
+                            the_element.value = the_filter.text;
+                        }
+                    }
+                });
+
+                // Sync sort values to hidden form fields
+                this.query.sort.forEach((the_sort) => {
+                    var the_name = the_sort.name.substring(0, the_sort.name.indexOf('.'));
+                    if (!the_name) the_name = the_sort.name;
+                    var the_element_1 = document.getElementsByName(the_name + ".sort")[0];
+                    var the_element_2 = document.getElementsByName(the_name + ".sort_order")[0];
+                    if (the_element_1) {
+                        the_element_1.value = 1;
+                        the_element_2.value = the_sort.order;
+                    }
+                });
+
+                // Notify external code (e.g. CakePHP form submission)
+                var trigger_element = document.getElementById('vueForm_trigger');
+                if (trigger_element) {
+                    trigger_element.dispatchEvent(new Event('change'));
+                }
             },
             deep: true
         },
@@ -1326,6 +1389,11 @@ export default {
                     }
                 } else {
                     this.emitQueryParams();
+                }
+                // Dispatch outside if/else so it fires in both server and client mode
+                var trigger_element = document.getElementById('vueForm_trigger');
+                if (trigger_element) {
+                    trigger_element.dispatchEvent(new Event('change'));
                 }
             }
         },
@@ -1446,6 +1514,10 @@ export default {
                 this.paginateFilter();
             } else {
                 this.emitQueryParams(newVal);
+            }
+            var trigger_element = document.getElementById('vueForm_trigger');
+            if (trigger_element) {
+                trigger_element.dispatchEvent(new Event('change'));
             }
         },
         'config.multi_column_sort': {

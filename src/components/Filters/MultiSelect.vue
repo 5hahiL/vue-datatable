@@ -145,7 +145,8 @@ export default {
                 // });
                 // return join(names, ",  ");
             } else {
-                return this.column.filter.selectedText.replace('{number}', this.selected_option_indexes.length);
+                let selectedText = (this.column.filter.selectedText) ? this.column.filter.selectedText : '{number} selected';
+                return selectedText.replace('{number}', this.selected_option_indexes.length);
             }
 
         },

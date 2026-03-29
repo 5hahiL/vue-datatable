@@ -1,11 +1,15 @@
 {
-    "name": "vue-bootstrap4-table",
-    "version": "1.1.11",
+    "name": "@5hahil/vue-datatable",
+    "version": "1.2.0",
     "main": "dist/vue-bootstrap4-table.umd.js",
     "module": "dist/vue-bootstrap4-table.esm.js",
     "unpkg": "dist/vue-bootstrap4-table.min.js",
-    "description": "Advanced table based on Vue 2 and Bootstrap 4",
-    "author": "Rubanraj Ravichandran <rubanraj54@gmail.com>",
+    "files": [
+        "dist",
+        "src"
+    ],
+    "description": "Advanced table based on Vue 2 and Bootstrap 4 (Locaboo fork)",
+    "author": "Shahil",
     "scripts": {
         "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
         "start": "npm run dev",
@@ -106,9 +110,9 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/rubanraj54/vue-bootstrap4-table"
+        "url": "https://github.com/5hahiL/vue-datatable"
     },
-    "homepage": "https://rubanraj54.gitbook.io",
+    "homepage": "https://github.com/5hahiL/vue-datatable",
     "license": "MIT",
     "nyc": {
         "include": [
